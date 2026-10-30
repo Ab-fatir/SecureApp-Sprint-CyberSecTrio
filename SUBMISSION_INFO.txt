@@ -1,0 +1,69 @@
+================================================================================
+CYC386 — SECURE SOFTWARE DESIGN AND DEVELOPMENT (FALL 2026)
+MIDTERM LAB EXAM: 1-WEEK DEVSECOPS SECURITY SPRINT SUBMISSION
+================================================================================
+
+Instructor: Engr. Muhammad Ahmad Nawaz (m.ahmadnawazz@gmail.com)
+Department of Computer Science, COMSATS University Islamabad
+
+--------------------------------------------------------------------------------
+TEAM MEMBERS
+--------------------------------------------------------------------------------
+1. Muhammad Tallat   | Registration No: FA23-BCT-029 | Lead Architect & Core Security
+2. Sadat Ali         | Registration No: FA23-BCT-034 | Threat Modeling & AppSec
+3. Hassaan Shakoor   | Registration No: FA23-BCT-054 | DevSecOps & QA Automation
+
+--------------------------------------------------------------------------------
+ONLINE ARTIFACT LINKS
+--------------------------------------------------------------------------------
+* Public GitHub Repository:
+  https://github.com/Ab-fatir/SecureApp-Sprint-CyberSecTrio
+
+* GitHub Actions CI/CD Pipeline (Passing Status):
+  https://github.com/Ab-fatir/SecureApp-Sprint-CyberSecTrio/actions
+
+* Latest Verified Production Pipeline Run (#41045169191):
+  https://github.com/Ab-fatir/SecureApp-Sprint-CyberSecTrio/actions/runs/41045169191
+
+* Live Demo Video on GitHub:
+  https://github.com/Ab-fatir/SecureApp-Sprint-CyberSecTrio/blob/main/demo_video.mp4
+
+--------------------------------------------------------------------------------
+MANDATORY DELIVERABLES INCLUDED IN THIS ZIP
+--------------------------------------------------------------------------------
+1. FINAL_REPORT.pdf          -> IEEE-Style Comprehensive Security Engineering Report
+2. PNE_Report.pdf            -> Protection Needs Elicitation & Explicit CIA Mapping
+3. THREAT_MODEL.pdf          -> DFD Level-0/1, STRIDE Matrix, Attack Trees & CVSS v3.1
+4. SECURITY_IMPLEMENTATION.md-> Detailed Before/After Code, PoCs, and Remediations
+5. SECURITY_TEST_REPORT.md   -> Bandit SAST, DAST Baseline & Pipeline Gate Evidence
+6. JIRA_SPRINT_BACKLOG.md    -> Epics -> Stories -> Tasks Traceability Matrix
+7. jira_backlog_export.csv   -> 1-Click Import File for Jira / GitHub Projects
+8. DEMO_VIDEO_SCRIPT.md      -> Timed 6-10 Minute Presentation & Screen Recording Guide
+9. demo_video.mp4            -> Rendered 1080p HD Demonstration Video with Voice Narration
+10. .github/workflows/ci-cd.yml -> Working GitHub Actions Pipeline with Fail-on-Critical Gate
+11. Dockerfile & docker-compose.yml -> Hardened Container Deployment (Non-root user UID 10001)
+12. Full Source Code:
+    - app/                   -> Web Portal, Auth, IDOR & CSRF Defenses, Security Middleware
+    - native_parser/         -> C Metadata Parser, Makefile (-fstack-protector-strong, ASLR, NX, ASAN)
+    - tests/                 -> 27 Automated Pytest Security & Regression Tests (100% Pass)
+    - scripts/               -> SAST, DAST, PDF, and Video Generation Tools
+    - reports/               -> JSON Audit Evidence from Bandit and DAST Baseline Scans
+
+--------------------------------------------------------------------------------
+QUICK VERIFICATION COMMANDS
+--------------------------------------------------------------------------------
+* Run Test Suite (27/27 pass):
+  python -m pytest tests/ -v
+
+* Run Production Hardened App:
+  python run.py --mode secure --port 5000
+
+* Run Lab Demonstration Mode:
+  python run.py --mode vulnerable --port 5000
+
+* Run Bandit SAST Gate:
+  python scripts/run_sast.py
+
+* Run DAST Baseline Scan:
+  python scripts/run_dast.py secure reports/dast_secure_report.json
+================================================================================
