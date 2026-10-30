@@ -234,10 +234,14 @@ def generate_all_pdfs():
         jira_flowables.append(Image("reports/jira_board.png", width=500, height=270))
         jira_flowables.append(Spacer(1, 8))
 
-    jira_flowables.append(Paragraph("3. Sample Work Item Detail & Resolution Evidence (CV-8 IDOR)", h1_style))
+    jira_flowables.append(Paragraph("3. Real Jira Work Item Details (CV-14 &amp; CV-20)", h1_style))
     if os.path.exists("reports/jira_task_detail.png"):
         jira_flowables.append(Spacer(1, 4))
-        jira_flowables.append(Image("reports/jira_task_detail.png", width=500, height=310))
+        jira_flowables.append(Image("reports/jira_task_detail.png", width=500, height=270))
+        jira_flowables.append(Spacer(1, 6))
+    if os.path.exists("reports/jira_task_detail_2.png"):
+        jira_flowables.append(Spacer(1, 4))
+        jira_flowables.append(Image("reports/jira_task_detail_2.png", width=500, height=270))
         jira_flowables.append(Spacer(1, 8))
 
     jira_flowables.append(Paragraph("4. Automated Terminal Verification Evidence", h1_style))

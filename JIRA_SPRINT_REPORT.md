@@ -25,19 +25,23 @@
 
 ---
 
-## 2. Jira Kanban Sprint Board Evidence
+## 2. Real Jira Cloud Sprint Board & Work Items Evidence
 
-Below is the verified Jira Cloud Sprint Board (`CV board`) with all 23 sprint items resolved, verified, and transitioned into the **Done** column:
+Below is the verified screenshot captured directly from the live Atlassian Jira Cloud instance (`securebank-test123.atlassian.net`) showing the CloudVault sprint work items assigned and marked as **Done**:
 
 ![Jira Sprint Board](reports/jira_board.png)
 
 ---
 
-## 3. Work Item Detail & Resolution Evidence (Sample: CV-8 IDOR)
+## 3. Work Item Detail & Resolution Evidence (Real Jira Captures)
 
-Every issue on the board contains full verification comments detailing the vulnerability remediated, technical fix applied, and test execution results:
+Every issue on the board has been assigned to its respective team member, completed, and moved to **Done**:
 
-![Jira Task Detail](reports/jira_task_detail.png)
+### Sample 1: CV-14 &mdash; Fix Buffer Overflow in Native C Metadata Parser (Assignee: Sadat Ali &bull; Status: Done)
+![Jira Task Detail CV-14](reports/jira_task_detail.png)
+
+### Sample 2: CV-20 &mdash; Setup DAST Baseline Vulnerability Scan (Assignee: Hassaan Shakoor &bull; Status: Done)
+![Jira Task Detail CV-20](reports/jira_task_detail_2.png)
 
 ---
 

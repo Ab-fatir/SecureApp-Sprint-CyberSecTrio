@@ -1,5 +1,6 @@
 import os
 import zipfile
+import shutil
 
 def create_clean_submission_zip():
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -40,15 +41,13 @@ def create_clean_submission_zip():
         (".github/workflows", True)
     ]
     
-    # Scripts to include (only officially required runners)
+    # Only the essential security automation scripts required by the assignment
     scripts_to_include = [
         "scripts/run_sast.py",
-        "scripts/run_dast.py",
-        "scripts/generate_pdf_reports.py",
-        "scripts/generate_demo_video.py"
+        "scripts/run_dast.py"
     ]
 
-    print(f"[*] Packaging CLEAN final submission archive: {os.path.basename(zip_filename)}...")
+    print(f"[*] Packaging final clean submission archive: {os.path.basename(zip_filename)}...")
     
     with zipfile.ZipFile(zip_filename, "w", zipfile.ZIP_DEFLATED) as zipf:
         # 1. Add root files
@@ -75,7 +74,7 @@ def create_clean_submission_zip():
                     zipf.write(full_p, rel_p)
                     print(f"  + Added: {rel_p}")
 
-        # 3. Add scripts
+        # 3. Add essential scripts only
         for s in scripts_to_include:
             p = os.path.join(base_dir, s)
             if os.path.exists(p):
@@ -87,7 +86,6 @@ def create_clean_submission_zip():
     
     # Create the alias copy
     alias_zip = os.path.join(base_dir, "SecureApp-Sprint-CyberSecTrio.zip")
-    import shutil
     shutil.copyfile(zip_filename, alias_zip)
     print(f"[+] Created mirror copy: {os.path.basename(alias_zip)}")
 
