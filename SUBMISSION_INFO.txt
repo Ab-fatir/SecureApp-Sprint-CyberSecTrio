@@ -19,6 +19,9 @@ ONLINE ARTIFACT LINKS
 * Public GitHub Repository:
   https://github.com/Ab-fatir/SecureApp-Sprint-CyberSecTrio
 
+* Live Sprint Issues & Traceability Board (Approved Equivalent per Section 6.1):
+  https://github.com/Ab-fatir/SecureApp-Sprint-CyberSecTrio/issues?q=is%3Aissue
+
 * GitHub Actions CI/CD Pipeline (Passing Status):
   https://github.com/Ab-fatir/SecureApp-Sprint-CyberSecTrio/actions
 
@@ -67,3 +70,4 @@ QUICK VERIFICATION COMMANDS
 * Run DAST Baseline Scan:
   python scripts/run_dast.py secure reports/dast_secure_report.json
 ================================================================================
+
