@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — CloudVault{% endblock %}
+
+{% block content %}
+<div class="row g-4">
+    <!-- Left Column: Documents List -->
+    <div class="col-lg-7">
+        <div class="card p-4 h-100">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4 class="mb-0">📁 Confidential Vault Documents</h4>
+                <span class="badge bg-primary">{{ documents|length }} Document(s)</span>
+            </div>
+            
+            {% if documents %}
+                <div class="list-group list-group-flush">
+                    {% for doc in documents %}
+                        <div class="list-group-item px-0 py-3 d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="mb-1 text-primary">
+                                    <a href="{{ url_for('vault.view_document', doc_id=doc.id) }}" class="text-decoration-none">
+                                        #{{ doc.id }}: {{ doc.title }}
+                                    </a>
+                                </h6>
+                                <small class="text-muted">
+                                    Author: <strong>{{ doc.author }}</strong> | 
+                                    Owner ID: <code>{{ doc.owner_id }}</code> | 
+                                    Uploaded: {{ doc.created_at.strftime('%Y-%m-%d %H:%M') }}
+                                </small>
+                            </div>
+                            <a href="{{ url_for('vault.view_document', doc_id=doc.id) }}" class="btn btn-sm btn-outline-primary">
+                                View & Transfer
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="alert alert-info mb-0">No documents found in your vault partition. Create one below!</div>
+            {% endif %}
+
+            <div class="mt-4 p-3 bg-light rounded border">
+                <h6 class="text-secondary mb-1">🔍 IDOR Vulnerability Class Note (CWE-639)</h6>
+                <small class="text-muted">
+                    In <strong>Vulnerable Mode</strong>, any authenticated user can view Document #1 (Alice) or Document #2 (Bob) simply by incrementing the URL parameter <code>/documents/&lt;id&gt;</code>. In <strong>Secure Mode</strong>, our centralized object-level authorization engine rejects foreign access with HTTP <code>403 Forbidden</code>.
+                </small>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Column: Create Document & Metadata Parser -->
+    <div class="col-lg-5">
+        <div class="card p-4">
+            <h4 class="mb-3">📤 Upload / Create Document</h4>
+            <form method="POST" action="{{ url_for('vault.upload_document') }}" enctype="multipart/form-data">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+                <div class="mb-3">
+                    <label class="form-label">Document Title</label>
+                    <input type="text" class="form-control" name="title" placeholder="e.g. Q4 Security Strategy">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Confidential Content</label>
+                    <textarea class="form-control" name="content" rows="4" placeholder="Enter sensitive document text..."></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">
+                        Attach Binary Header File (Optional)
+                        <span class="badge bg-secondary">C Native Parser</span>
+                    </label>
+                    <input type="file" class="form-control" name="header_file">
+                    <div class="form-text">
+                        Files with magic bytes <code>CVLT</code> will be parsed by our C native extension (<code>metadata_parser</code>) for metadata extraction.
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 py-2">Submit Document</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
