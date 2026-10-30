@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block title %}{{ doc.title }} — CloudVault{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card p-4 mb-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h3 class="mb-0">📄 Document #{{ doc.id }}: {{ doc.title }}</h3>
+                <span class="badge bg-danger">CONFIDENTIAL</span>
+            </div>
+
+            <table class="table table-bordered mb-4">
+                <tbody>
+                    <tr>
+                        <th style="width: 25%;">Author</th>
+                        <td>{{ doc.author }}</td>
+                    </tr>
+                    <tr>
+                        <th>Owner Account ID</th>
+                        <td><code>User #{{ doc.owner_id }}</code></td>
+                    </tr>
+                    <tr>
+                        <th>Created At</th>
+                        <td>{{ doc.created_at.strftime('%Y-%m-%d %H:%M:%S UTC') }}</td>
+                    </tr>
+                    <tr>
+                        <th>Confidential Data</th>
+                        <td class="bg-light"><pre class="mb-0">{{ doc.content }}</pre></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- State-Changing Ownership Transfer (CSRF Focus) -->
+            <div class="border-top pt-4">
+                <h5 class="text-danger mb-2">🔄 Critical Action: Transfer Ownership</h5>
+                <p class="text-muted small">
+                    This state-changing action transfers full rights of this document to another user.
+                    {% if security_mode == 'secure' %}
+                        Protected with an <strong>Anti-CSRF Synchronizer Token</strong>.
+                    {% else %}
+                        <strong class="text-danger">VULNERABLE: No CSRF verification! Susceptible to Cross-Site Request Forgery.</strong>
+                    {% endif %}
+                </p>
+
+                <form method="POST" action="{{ url_for('vault.transfer_ownership', doc_id=doc.id) }}" class="row g-2 align-items-center">
+                    {% if security_mode == 'secure' %}
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    {% endif %}
+
+                    <div class="col-auto">
+                        <label class="col-form-label">New Owner Username:</label>
+                    </div>
+                    <div class="col-auto">
+                        <input type="text" class="form-control" name="new_owner" placeholder="e.g. bob" required>
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-warning">Transfer Rights</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="mt-4">
+                <a href="{{ url_for('vault.dashboard') }}" class="btn btn-outline-secondary">← Back to Dashboard</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}DevOps Diagnostics — CloudVault{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card p-4">
+            <h3 class="card-title mb-2">🌐 DevOps Network Diagnostic Console</h3>
+            <p class="text-muted">Test connectivity and latency to remote cluster nodes and replica vaults.</p>
+
+            <form method="POST" action="{{ url_for('diagnostics.network_diagnostics') }}" class="mb-4">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+                <div class="input-group">
+                    <span class="input-group-text">Target Host:</span>
+                    <input type="text" class="form-control" name="host" value="{{ target_host }}" placeholder="e.g. 127.0.0.1 or localhost" required>
+                    <button class="btn btn-primary" type="submit">Execute Ping</button>
+                </div>
+            </form>
+
+            {% if result %}
+                <div class="card bg-dark text-white p-3 mb-3">
+                    <div class="d-flex justify-content-between mb-2">
+                        <span class="badge bg-secondary">Status: {{ 'SUCCESS' if result.success else 'FAILED' }}</span>
+                        {% if result.command %}
+                            <small class="text-muted"><code>{{ result.command }}</code></small>
+                        {% endif %}
+                    </div>
+                    <pre class="mb-0" style="white-space: pre-wrap; font-family: monospace;">{{ result.output if result.output else result.error }}</pre>
+                </div>
+            {% endif %}
+
+            <div class="p-3 bg-light rounded border mt-3">
+                <h6 class="text-secondary mb-1">⚡ CWE-78: OS Command Injection Analysis</h6>
+                <p class="small text-muted mb-0">
+                    {% if mode == 'vulnerable' %}
+                        <span class="text-danger"><strong>VULNERABLE ENGINE ACTIVE:</strong> Input is directly passed to system shell without validation or argument isolation. Attackers can inject chaining tokens like <code>127.0.0.1 & dir</code> or <code>127.0.0.1; id</code>.</span>
+                    {% else %}
+                        <span class="text-success"><strong>HARDENED ENGINE ACTIVE:</strong> Strict regex allow-list (<code>^[a-zA-Z0-9.-]+$</code>) enforces valid IP/hostname formats. Execution uses <code>subprocess.run(..., shell=False)</code> with argument arrays, eliminating shell interpretation.</span>
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

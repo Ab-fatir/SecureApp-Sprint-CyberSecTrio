@@ -1,0 +1,24 @@
+Issue Key,Issue Type,Summary,Assignee,Status,Priority,Epic Link
+CV-1,Epic,Foundation PNE and Project Setup,Muhammad Tallat,Done,High,
+CV-2,Epic,Threat Modeling and Quantitative Risk,Sadat Ali,Done,High,
+CV-3,Epic,Secure Implementation of Core Vulnerability Classes,Muhammad Tallat,Done,Highest,
+CV-4,Epic,CI CD Pipeline and Security Automation,Hassaan Shakoor,Done,High,
+CV-5,Epic,Final Documentation and Verification,All Members,Done,Medium,
+CV-10,Story,Setup User Authentication and Password Hashing,Muhammad Tallat,Done,High,CV-1
+CV-11,Task,Setup SQLite Models and Schema,Muhammad Tallat,Done,Medium,CV-1
+CV-12,Story,Fix IDOR on Document Retrieval Endpoint,Muhammad Tallat,Done,Highest,CV-3
+CV-13,Task,Add Ownership Verification Check in Document View,Muhammad Tallat,Done,High,CV-3
+CV-14,Story,Fix CSRF on Ownership Transfer Endpoint,Muhammad Tallat,Done,Highest,CV-3
+CV-15,Task,Add Synchronizer CSRF Token in Transfer Form,Muhammad Tallat,Done,High,CV-3
+CV-16,Story,Fix OS Command Injection in Diagnostic Ping,Hassaan Shakoor,Done,Highest,CV-3
+CV-17,Task,Implement Regex Whitelist and shell=False Parameterization,Hassaan Shakoor,Done,High,CV-3
+CV-18,Story,Fix Buffer Overflow in Native C Metadata Parser,Sadat Ali,Done,Highest,CV-3
+CV-19,Task,Add Stack Canaries FORTIFY_SOURCE and ASAN Flags,Sadat Ali,Done,High,CV-3
+CV-20,Story,Fix Clickjacking on Admin Management Console,Sadat Ali,Done,High,CV-3
+CV-21,Task,Add X-Frame-Options DENY and CSP frame-ancestors,Sadat Ali,Done,High,CV-3
+CV-22,Story,Implement Security Audit Logging Engine,Muhammad Tallat,Done,Medium,CV-1
+CV-24,Story,Setup Bandit SAST Security Gate,Hassaan Shakoor,Done,High,CV-4
+CV-25,Story,Setup DAST Baseline Vulnerability Scan,Hassaan Shakoor,Done,High,CV-4
+CV-26,Story,Build GitHub Actions Workflow with Fail-on-Critical,Hassaan Shakoor,Done,Highest,CV-4
+CV-28,Story,Dockerize Application with Non-Root User,Hassaan Shakoor,Done,Medium,CV-4
+CV-30,Story,Compile IEEE-Style Final Security Report,All Members,Done,High,CV-5

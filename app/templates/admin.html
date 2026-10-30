@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block title %}Admin Console — CloudVault{% endblock %}
+
+{% block content %}
+<div class="row g-4">
+    <div class="col-12">
+        <div class="card p-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h3 class="mb-1">⚙️ Administrative Management Console</h3>
+                    <p class="text-muted mb-0">High-privilege system controls, user directory, and security audit logs</p>
+                </div>
+                <span class="badge bg-danger fs-6">ADMIN PRIVILEGED</span>
+            </div>
+
+            <!-- Sensitive Action Buttons (Clickjacking Targets) -->
+            <div class="alert alert-warning d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <strong>Sensitive Operation:</strong> Emergency Master Vault Lockdown
+                    <div class="small text-muted">Revokes all active bearer tokens and suspends external uploads.</div>
+                </div>
+                <button class="btn btn-danger btn-sm" onclick="alert('Lockdown action simulated!')">Trigger Master Lockdown</button>
+            </div>
+
+            <div class="row">
+                <!-- User Directory -->
+                <div class="col-md-6 mb-4">
+                    <h5>Registered Users & Roles</h5>
+                    <div class="table-responsive">
+                        <table class="table table-sm table-striped">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Username</th>
+                                    <th>Role</th>
+                                    <th>Created</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for u in users %}
+                                    <tr>
+                                        <td>#{{ u.id }}</td>
+                                        <td><strong>{{ u.username }}</strong></td>
+                                        <td><span class="badge bg-{{ 'primary' if u.role == 'admin' else 'secondary' }}">{{ u.role }}</span></td>
+                                        <td>{{ u.created_at.strftime('%Y-%m-%d') }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Audit Logs -->
+                <div class="col-md-6 mb-4">
+                    <h5>Security Audit Log (Recent 20)</h5>
+                    <div class="table-responsive" style="max-height: 250px; overflow-y: auto;">
+                        <table class="table table-sm table-hover small">
+                            <thead>
+                                <tr>
+                                    <th>Time</th>
+                                    <th>Action</th>
+                                    <th>Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for log in logs %}
+                                    <tr>
+                                        <td>{{ log.timestamp.strftime('%H:%M:%S') }}</td>
+                                        <td><code>{{ log.action }}</code></td>
+                                        <td>{{ log.details }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-3 bg-light rounded border">
+                <h6 class="text-secondary mb-1">🛡️ CWE-1021: Clickjacking Framing Analysis</h6>
+                <p class="small text-muted mb-0">
+                    If this console is framed inside an adversarial website via an <code>&lt;iframe&gt;</code>, the attacker can deceive an authenticated administrator into clicking the "Trigger Master Lockdown" button through transparent UI overlays.
+                    Our remediation applies <code>X-Frame-Options: DENY</code> and CSP <code>frame-ancestors 'none'</code> headers to forbid framing across all modern user agents.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
