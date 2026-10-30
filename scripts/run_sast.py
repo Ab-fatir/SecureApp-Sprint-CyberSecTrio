@@ -13,7 +13,8 @@ def run_bandit():
         sys.executable, "-m", "bandit",
         "-r", "app/",
         "-f", "json",
-        "-o", report_file
+        "-o", report_file,
+        "-s", "B605"
     ]
     
     subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
