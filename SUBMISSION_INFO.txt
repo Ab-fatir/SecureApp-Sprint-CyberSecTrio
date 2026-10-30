@@ -20,6 +20,9 @@ ONLINE ARTIFACT LINKS
   https://github.com/Ab-fatir/SecureApp-Sprint-CyberSecTrio
 
 * Live Sprint Issues & Traceability Board (Approved Equivalent per Section 6.1):
+  https://securebank-test123.atlassian.net/jira/software/projects/CV/boards/2
+
+* Live GitHub Issues Board (Alternative Traceability Mirror):
   https://github.com/Ab-fatir/SecureApp-Sprint-CyberSecTrio/issues?q=is%3Aissue
 
 * GitHub Actions CI/CD Pipeline (Passing Status):

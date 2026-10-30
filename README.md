@@ -115,7 +115,8 @@ Access the application at `http://localhost:5000`.
 | **Security Implementation** | Before/after code, root-cause analysis, compiler flags, and fixes | [`SECURITY_IMPLEMENTATION.md`](file:///d:/Uni/7th%20sem/SSDD/lab%20mid/SECURITY_IMPLEMENTATION.md) |
 | **Security Test Report** | SAST, DAST, and CI/CD security gate fail-on-critical evidence | [`SECURITY_TEST_REPORT.md`](file:///d:/Uni/7th%20sem/SSDD/lab%20mid/SECURITY_TEST_REPORT.md) |
 | **Final IEEE Report** | 18–30 page structured comprehensive DevSecOps report | [`FINAL_REPORT.md`](file:///d:/Uni/7th%20sem/SSDD/lab%20mid/FINAL_REPORT.md) / `FINAL_REPORT.pdf` |
-| **Live Sprint Board (GitHub)** | 18 traceable sprint items (Approved Equivalent per Section 6.1) | [GitHub Issues Board](https://github.com/Ab-fatir/SecureApp-Sprint-CyberSecTrio/issues?q=is%3Aissue) |
+| **Live Sprint Board (Jira)** | Official Atlassian Jira Cloud Board (23 Traceable Items) | [Jira Sprint Board](https://securebank-test123.atlassian.net/jira/software/projects/CV/boards/2) |
+| **Mirror Sprint Board (GitHub)** | 18 traceable sprint items (Traceability Mirror) | [GitHub Issues Board](https://github.com/Ab-fatir/SecureApp-Sprint-CyberSecTrio/issues?q=is%3Aissue) |
 | **Jira Sprint Backlog** | Full traceability (PNE -> Threat -> Fix -> Test) | [`JIRA_SPRINT_BACKLOG.md`](file:///d:/Uni/7th%20sem/SSDD/lab%20mid/JIRA_SPRINT_BACKLOG.md) / `jira_backlog_export.csv` |
 | **Demo Video Script** | Timed 6–10 minute step-by-step recording guide | [`DEMO_VIDEO_SCRIPT.md`](file:///d:/Uni/7th%20sem/SSDD/lab%20mid/DEMO_VIDEO_SCRIPT.md) |
 | **CI/CD Pipeline** | GitHub Actions multi-stage workflow with automated gates | [`.github/workflows/ci-cd.yml`](file:///d:/Uni/7th%20sem/SSDD/lab%20mid/.github/workflows/ci-cd.yml) |

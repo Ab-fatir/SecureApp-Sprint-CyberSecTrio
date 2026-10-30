@@ -1,6 +1,8 @@
 # CloudVault DevSecOps Sprint Backlog (Jira Traceability)
 
 **Project:** SecureApp-Sprint-CyberSecTrio (CloudVault)  
+**Live Jira Sprint Board:** [https://securebank-test123.atlassian.net/jira/software/projects/CV/boards/2](https://securebank-test123.atlassian.net/jira/software/projects/CV/boards/2)  
+**Mirror GitHub Issues Board:** [https://github.com/Ab-fatir/SecureApp-Sprint-CyberSecTrio/issues](https://github.com/Ab-fatir/SecureApp-Sprint-CyberSecTrio/issues)  
 **Team Members:**  
 * **Muhammad Tallat** (FA23-BCT-029)  
 * **Sadat Ali** (FA23-BCT-034)  

@@ -37,3 +37,4 @@ if __name__ == "__main__":
     import shutil
     shutil.copyfile(primary_zip, alias_zip)
     print(f"[+] Created copy: {alias_zip}")
+
