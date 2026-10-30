@@ -1,0 +1,10 @@
+services:
+  cloudvault:
+    build: .
+    container_name: cloudvault
+    ports:
+      - "5000:5000"
+    environment:
+      - SECURITY_MODE=secure
+      - SECRET_KEY=student-demo-secret-key-2026
+    restart: unless-stopped

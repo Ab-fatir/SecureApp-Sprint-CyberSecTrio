@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Clickjacking",
+    "severity": "High",
+    "url": "/admin/console"
+  },
+  {
+    "name": "IDOR on Document View",
+    "severity": "Critical",
+    "url": "/documents/2"
+  }
+]
