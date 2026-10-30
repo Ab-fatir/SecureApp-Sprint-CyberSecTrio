@@ -3,7 +3,7 @@ import sys
 
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, PageBreak, KeepTogether
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, PageBreak, KeepTogether, Image
 from reportlab.lib import colors
 from reportlab.pdfgen import canvas
 
@@ -54,20 +54,20 @@ def generate_all_pdfs():
         'DocTitle',
         parent=styles['Heading1'],
         fontName='Helvetica-Bold',
-        fontSize=20,
-        leading=24,
+        fontSize=18,
+        leading=22,
         textColor=colors.HexColor('#0f172a'),
-        spaceAfter=10
+        spaceAfter=8
     )
 
     h1_style = ParagraphStyle(
         'H1',
         parent=styles['Heading2'],
         fontName='Helvetica-Bold',
-        fontSize=13,
-        leading=16,
+        fontSize=12,
+        leading=15,
         textColor=colors.HexColor('#1e3a8a'),
-        spaceBefore=14,
+        spaceBefore=12,
         spaceAfter=6,
         keepWithNext=True
     )
@@ -76,28 +76,29 @@ def generate_all_pdfs():
         'Body',
         parent=styles['Normal'],
         fontName='Helvetica',
-        fontSize=9.5,
-        leading=13.5,
+        fontSize=9,
+        leading=13,
         textColor=colors.HexColor('#1e293b'),
-        spaceAfter=5
+        spaceAfter=4
     )
 
     meta_style = ParagraphStyle(
         'Meta',
         parent=styles['Normal'],
         fontName='Helvetica',
-        fontSize=9,
+        fontSize=8.5,
         leading=12,
         textColor=colors.HexColor('#475569'),
-        spaceAfter=10
+        spaceAfter=8
     )
 
     # 1. PNE_Report.pdf
     pne_flowables = [
         Paragraph("Protection Needs Elicitation (PNE) & CIA Triad Mapping Report", title_style),
         Paragraph("<b>Course:</b> CYC386 Secure Software Design and Development | <b>Sprint:</b> Midterm Lab Exam (Fall 2026)<br/>"
-                  "<b>Instructor:</b> Engr. Muhammad Ahmad Nawaz | <b>Team:</b> Muhammad Tallat (FA23-BCT-029), Sadat Ali (FA23-BCT-034), Hassaan Shakoor (FA23-BCT-054)", meta_style),
-        Spacer(1, 10),
+                  "<b>Instructor:</b> Engr. Muhammad Ahmad Nawaz | <b>Team:</b> Muhammad Tallat (FA23-BCT-029), Sadat Ali (FA23-BCT-034), Hassaan Shakoor (FA23-BCT-054)<br/>"
+                  "<b>Live Jira Board:</b> https://securebank-test123.atlassian.net/jira/software/projects/CV/boards/2", meta_style),
+        Spacer(1, 8),
         Paragraph("1. Executive Summary", h1_style),
         Paragraph("In accordance with CDF Unit 2, this document establishes the asset inventory, stakeholder perspectives, and explicit mapping to the Confidentiality, Integrity, and Availability (CIA) triad for the CloudVault platform. Every elicited protection need serves as the foundational justification for threat modeling, engineering remediations, and automated test gates.", body_style),
         Paragraph("2. Asset Inventory", h1_style),
@@ -137,8 +138,9 @@ def generate_all_pdfs():
     tm_flowables = [
         Paragraph("Threat Model & Quantitative Risk Assessment Report", title_style),
         Paragraph("<b>Course:</b> CYC386 Secure Software Design and Development | <b>Sprint:</b> Midterm Lab Exam (Fall 2026)<br/>"
-                  "<b>Instructor:</b> Engr. Muhammad Ahmad Nawaz | <b>Team:</b> Muhammad Tallat (FA23-BCT-029), Sadat Ali (FA23-BCT-034), Hassaan Shakoor (FA23-BCT-054)", meta_style),
-        Spacer(1, 10),
+                  "<b>Instructor:</b> Engr. Muhammad Ahmad Nawaz | <b>Team:</b> Muhammad Tallat (FA23-BCT-029), Sadat Ali (FA23-BCT-034), Hassaan Shakoor (FA23-BCT-054)<br/>"
+                  "<b>Live Jira Board:</b> https://securebank-test123.atlassian.net/jira/software/projects/CV/boards/2", meta_style),
+        Spacer(1, 8),
         Paragraph("1. System Architecture & DFD Overview", h1_style),
         Paragraph("CloudVault is partitioned into three trust boundaries: Untrusted Client Zone, Application DMZ, and Host OS & Persistence Layer. Data flows between these boundaries were analyzed using STRIDE.", body_style),
         Paragraph("2. STRIDE Threat Analysis & CVSS v3.1 Quantitative Risk Scores", h1_style),
@@ -146,11 +148,11 @@ def generate_all_pdfs():
 
     tm_table_data = [
         [Paragraph("<b>Threat ID</b>", body_style), Paragraph("<b>Element</b>", body_style), Paragraph("<b>STRIDE Category</b>", body_style), Paragraph("<b>CVSS v3.1 Vector</b>", body_style), Paragraph("<b>Score / Severity</b>", body_style), Paragraph("<b>Jira</b>", body_style)],
-        [Paragraph("T-01", body_style), Paragraph("Process 4.0 Native Parser", body_style), Paragraph("Tampering / Elevation of Privilege", body_style), Paragraph("CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H", body_style), Paragraph("<b>8.8 (High)</b>", body_style), Paragraph("CV-18", body_style)],
-        [Paragraph("T-02", body_style), Paragraph("Process 3.0 Diagnostics", body_style), Paragraph("Elevation of Privilege (CWE-78)", body_style), Paragraph("CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H", body_style), Paragraph("<b>9.9 (Critical)</b>", body_style), Paragraph("CV-16", body_style)],
-        [Paragraph("T-03", body_style), Paragraph("Process 2.0 Document Vault", body_style), Paragraph("Information Disclosure (CWE-639)", body_style), Paragraph("CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N", body_style), Paragraph("<b>6.5 (Medium)</b>", body_style), Paragraph("CV-12", body_style)],
-        [Paragraph("T-04", body_style), Paragraph("Process 2.0 Transfer", body_style), Paragraph("Tampering / Spoofing (CWE-352)", body_style), Paragraph("CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:H/A:N", body_style), Paragraph("<b>6.5 (Medium)</b>", body_style), Paragraph("CV-14", body_style)],
-        [Paragraph("T-05", body_style), Paragraph("Process 2.0 Admin Console", body_style), Paragraph("Tampering (CWE-1021 Clickjacking)", body_style), Paragraph("CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:L/A:N", body_style), Paragraph("<b>4.3 (Medium)</b>", body_style), Paragraph("CV-20", body_style)],
+        [Paragraph("T-01", body_style), Paragraph("Process 4.0 Native Parser", body_style), Paragraph("Tampering / Elevation of Privilege", body_style), Paragraph("CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H", body_style), Paragraph("<b>8.8 (High)</b>", body_style), Paragraph("CV-14", body_style)],
+        [Paragraph("T-02", body_style), Paragraph("Process 3.0 Diagnostics", body_style), Paragraph("Elevation of Privilege (CWE-78)", body_style), Paragraph("CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H", body_style), Paragraph("<b>9.9 (Critical)</b>", body_style), Paragraph("CV-12", body_style)],
+        [Paragraph("T-03", body_style), Paragraph("Process 2.0 Document Vault", body_style), Paragraph("Information Disclosure (CWE-639)", body_style), Paragraph("CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N", body_style), Paragraph("<b>6.5 (Medium)</b>", body_style), Paragraph("CV-8", body_style)],
+        [Paragraph("T-04", body_style), Paragraph("Process 2.0 Transfer", body_style), Paragraph("Tampering / Spoofing (CWE-352)", body_style), Paragraph("CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:H/A:N", body_style), Paragraph("<b>6.5 (Medium)</b>", body_style), Paragraph("CV-10", body_style)],
+        [Paragraph("T-05", body_style), Paragraph("Process 2.0 Admin Console", body_style), Paragraph("Tampering (CWE-1021 Clickjacking)", body_style), Paragraph("CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:L/A:N", body_style), Paragraph("<b>4.3 (Medium)</b>", body_style), Paragraph("CV-16", body_style)],
     ]
 
     t_tm = Table(tm_table_data, colWidths=[40, 90, 95, 175, 70, 34])
@@ -177,31 +179,76 @@ def generate_all_pdfs():
         Paragraph("<b>CYC386 — Secure Software Design and Development | Midterm DevSecOps Sprint Report</b><br/>"
                   "<b>Department of Computer Science, COMSATS University Islamabad (Fall 2026)</b><br/>"
                   "<b>Instructor:</b> Engr. Muhammad Ahmad Nawaz<br/>"
-                  "<b>Authors:</b> Muhammad Tallat (FA23-BCT-029), Sadat Ali (FA23-BCT-034), Hassaan Shakoor (FA23-BCT-054)", meta_style),
-        Spacer(1, 10),
+                  "<b>Authors:</b> Muhammad Tallat (FA23-BCT-029), Sadat Ali (FA23-BCT-034), Hassaan Shakoor (FA23-BCT-054)<br/>"
+                  "<b>Live Jira Board:</b> https://securebank-test123.atlassian.net/jira/software/projects/CV/boards/2", meta_style),
+        Spacer(1, 8),
         Paragraph("Abstract", h1_style),
         Paragraph("This report presents the complete security engineering lifecycle for CloudVault, an attack-resistant enterprise collaboration portal. We conducted Protection Needs Elicitation, systematic STRIDE threat modeling, and quantitative CVSS v3.1 risk scoring. We identified, demonstrated in a controlled lab environment, and remediated five mandatory vulnerability classes: Buffer Overflow (CWE-120), OS Command Injection (CWE-78), IDOR (CWE-639), CSRF (CWE-352), and Clickjacking (CWE-1021). Our architecture integrates native compiler mitigations, a GitHub Actions CI/CD pipeline with automated SAST and DAST gates, and Docker containerization. All work items maintain full traceability across Jira, Git branches, PR reviews, and automated verification tests.", body_style),
         Paragraph("1. System Architecture", h1_style),
         Paragraph("CloudVault comprises a Python/Flask web presentation layer, an SQLite database, an isolated native C metadata parser (`libparser_secure.so`), and a centralized security layer (`app/security.py`). The system enforces strict trust boundaries between client requests, application processing, and underlying host system calls.", body_style),
-        Paragraph("2. Protection Needs Elicitation (PNE) & CIA Triad Mapping", h1_style),
-        Paragraph("All assets (DA-01 to DA-04, PA-01 to PA-05, CA-01 to CA-04) were mapped to Confidentiality, Integrity, and Availability. Key requirements include object-level authorization (SR-02), synchronizer anti-CSRF tokens (SR-03), parameterization without shell interpretation (SR-04), native memory bounds checking (SR-05), and clickjacking frame prevention (SR-06).", body_style),
-        Paragraph("3. Threat Modeling & CVSS v3.1 Scoring", h1_style),
-        Paragraph("Threats were analyzed across DFD Level-1 processes: Command Injection (CVSS 9.9 Critical), Native Buffer Overflow (CVSS 8.8 High), IDOR (CVSS 6.5 Medium), CSRF (CVSS 6.5 Medium), and Clickjacking (CVSS 4.3 Medium). Prioritized mitigations were tracked in Jira sprint issues CV-10 through CV-30.", body_style),
-        Paragraph("4. Core Vulnerability Remediation", h1_style),
+        Paragraph("2. Core Vulnerability Remediation", h1_style),
         Paragraph("• <b>Buffer Overflow (CWE-120):</b> Replaced unbounded `strcpy()` with bounded `memcpy` and `snprintf`. Enforced `CVLT` magic bytes and payload limits. Enabled `-fstack-protector-strong`, `-D_FORTIFY_SOURCE=2`, ASLR, and NX.<br/>"
                   "• <b>Command Injection (CWE-78):</b> Eliminated `os.popen()` and shell interpretation. Implemented `subprocess.run(shell=False)` with argument arrays and a strict regex whitelist (`^[a-zA-Z0-9.-]+$`).<br/>"
                   "• <b>IDOR (CWE-639):</b> Implemented centralized tenancy verification in `check_document_access()`. Unauthorized access returns HTTP 403 Forbidden.<br/>"
                   "• <b>CSRF (CWE-352):</b> Implemented the Synchronizer Token Pattern with constant-time token comparison and configured cookies with `SameSite=Strict`.<br/>"
                   "• <b>Clickjacking (CWE-1021):</b> Applied global middleware injecting `X-Frame-Options: DENY` and CSP `frame-ancestors 'none'` headers.", body_style),
-        Paragraph("5. Automated CI/CD Pipeline, SAST & DAST Testing", h1_style),
-        Paragraph("Our GitHub Actions pipeline (`ci-cd.yml`) enforces build compilation, 27 automated `pytest` test cases, Bandit SAST analysis, and dynamic DAST baseline scanning. Pre-remediation scans showed 1 High SAST finding and 2 High DAST findings. Post-remediation scans pass cleanly with 0 High or Critical findings.", body_style),
-        Paragraph("6. Individual Contribution Statement", h1_style),
-        Paragraph("• <b>Muhammad Tallat (FA23-BCT-029):</b> Lead Architect & Core Engineer — Designed database models, authentication, IDOR access controls, and CSRF token verification. Authored PNE report.<br/>"
-                  "• <b>Sadat Ali (FA23-BCT-034):</b> AppSec & Threat Modeling Engineer — Implemented native C parser, memory bounds checking, compiler flags in Makefile, Clickjacking headers, and Threat Model.<br/>"
-                  "• <b>Hassaan Shakoor (FA23-BCT-054):</b> DevSecOps & QA Automation Engineer — Remediated Command Injection, developed 27 automated test cases, configured GitHub Actions CI/CD, and created Docker containerization.", body_style),
+        Paragraph("3. Jira Sprint Board & DevSecOps Traceability Evidence", h1_style),
+        Paragraph("All 23 sprint items were imported, assigned to real team members, and transitioned into Done on the official Jira Cloud instance (https://securebank-test123.atlassian.net/jira/software/projects/CV/boards/2):", body_style),
     ]
+
+    if os.path.exists("reports/jira_board.png"):
+        fr_flowables.append(Spacer(1, 4))
+        fr_flowables.append(Image("reports/jira_board.png", width=500, height=270))
+        fr_flowables.append(Spacer(1, 6))
+
+    fr_flowables.append(Paragraph("4. Automated Security Testing & Terminal Evidence", h1_style))
+    fr_flowables.append(Paragraph("Execution results for full test suite (27/27 pass), Bandit SAST security gate, and DAST scan:", body_style))
+
+    if os.path.exists("reports/terminal_verification.png"):
+        fr_flowables.append(Spacer(1, 4))
+        fr_flowables.append(Image("reports/terminal_verification.png", width=500, height=330))
+        fr_flowables.append(Spacer(1, 6))
+
+    fr_flowables.append(Paragraph("5. Individual Contribution Statement", h1_style))
+    fr_flowables.append(Paragraph("• <b>Muhammad Tallat (FA23-BCT-029):</b> Lead Architect & Core Engineer — Designed database models, authentication, IDOR access controls, and CSRF token verification. Authored PNE report.<br/>"
+                                  "• <b>Sadat Ali (FA23-BCT-034):</b> AppSec & Threat Modeling Engineer — Implemented native C parser, memory bounds checking, compiler flags in Makefile, Clickjacking headers, and Threat Model.<br/>"
+                                  "• <b>Hassaan Shakoor (FA23-BCT-054):</b> DevSecOps & QA Automation Engineer — Remediated Command Injection, developed 27 automated test cases, configured GitHub Actions CI/CD, and created Docker containerization.", body_style))
+
     build_pdf("FINAL_REPORT.pdf", "Final Security Engineering Report", fr_flowables)
-    print("PDF generation complete: PNE_Report.pdf, THREAT_MODEL.pdf, FINAL_REPORT.pdf")
+
+    # 4. JIRA_SPRINT_REPORT.pdf
+    jira_flowables = [
+        Paragraph("CloudVault: Jira Sprint 1 Backlog & Verification Report", title_style),
+        Paragraph("<b>CYC386 — Secure Software Design and Development | Midterm DevSecOps Sprint</b><br/>"
+                  "<b>Department of Computer Science, COMSATS University Islamabad (Fall 2026)</b><br/>"
+                  "<b>Instructor:</b> Engr. Muhammad Ahmad Nawaz | <b>Team:</b> Muhammad Tallat (FA23-BCT-029), Sadat Ali (FA23-BCT-034), Hassaan Shakoor (FA23-BCT-054)<br/>"
+                  "<b>Official Board:</b> https://securebank-test123.atlassian.net/jira/software/projects/CV/boards/2", meta_style),
+        Spacer(1, 8),
+        Paragraph("1. Sprint Execution Overview", h1_style),
+        Paragraph("The CloudVault DevSecOps security sprint was managed through Atlassian Jira Cloud under project <b>CV</b>. A total of <b>23 backlog items</b> (5 Epics, 10 Stories, and 8 Tasks) were executed across the three team members. 100% of issues reached the <b>Done</b> status, verified against automated pytest test suites and CI/CD security gates.", body_style),
+        Paragraph("2. Verified Jira Cloud Sprint Board Screenshot", h1_style),
+    ]
+
+    if os.path.exists("reports/jira_board.png"):
+        jira_flowables.append(Spacer(1, 4))
+        jira_flowables.append(Image("reports/jira_board.png", width=500, height=270))
+        jira_flowables.append(Spacer(1, 8))
+
+    jira_flowables.append(Paragraph("3. Sample Work Item Detail & Resolution Evidence (CV-8 IDOR)", h1_style))
+    if os.path.exists("reports/jira_task_detail.png"):
+        jira_flowables.append(Spacer(1, 4))
+        jira_flowables.append(Image("reports/jira_task_detail.png", width=500, height=310))
+        jira_flowables.append(Spacer(1, 8))
+
+    jira_flowables.append(Paragraph("4. Automated Terminal Verification Evidence", h1_style))
+    if os.path.exists("reports/terminal_verification.png"):
+        jira_flowables.append(Spacer(1, 4))
+        jira_flowables.append(Image("reports/terminal_verification.png", width=500, height=330))
+        jira_flowables.append(Spacer(1, 8))
+
+    build_pdf("JIRA_SPRINT_REPORT.pdf", "Jira Sprint Backlog Report", jira_flowables)
+
+    print("PDF generation complete: PNE_Report.pdf, THREAT_MODEL.pdf, FINAL_REPORT.pdf, JIRA_SPRINT_REPORT.pdf")
 
 if __name__ == "__main__":
     generate_all_pdfs()

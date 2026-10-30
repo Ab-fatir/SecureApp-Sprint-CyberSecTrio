@@ -42,7 +42,8 @@ MANDATORY DELIVERABLES INCLUDED IN THIS ZIP
 3. THREAT_MODEL.pdf          -> DFD Level-0/1, STRIDE Matrix, Attack Trees & CVSS v3.1
 4. SECURITY_IMPLEMENTATION.md-> Detailed Before/After Code, PoCs, and Remediations
 5. SECURITY_TEST_REPORT.md   -> Bandit SAST, DAST Baseline & Pipeline Gate Evidence
-6. JIRA_SPRINT_BACKLOG.md    -> Epics -> Stories -> Tasks Traceability Matrix
+6. JIRA_SPRINT_REPORT.pdf    -> Jira Cloud Board Evidence, Task Breakdown & Screenshots
+7. JIRA_SPRINT_BACKLOG.md    -> Epics -> Stories -> Tasks Traceability Matrix
 7. jira_backlog_export.csv   -> 1-Click Import File for Jira / GitHub Projects
 8. DEMO_VIDEO_SCRIPT.md      -> Timed 6-10 Minute Presentation & Screen Recording Guide
 9. demo_video.mp4            -> Rendered 1080p HD Demonstration Video with Voice Narration
